@@ -27,7 +27,6 @@ class FQServer(object):
         self.config.read(config_path)
         # pass the config file to configure the FQ core.
         self.queue = FQ(config_path)
-        self.queue._initialize()
 
         # Starlette app with routes and startup hook
         self.app = Starlette(
@@ -77,6 +76,8 @@ class FQServer(object):
 
     async def _on_startup(self):
         """Configure background tasks on app startup."""
+        
+        await self.queue._initialize()
         # mimic original behavior: use requeue_with_lock loop
         asyncio.create_task(self.requeue_with_lock())
 
