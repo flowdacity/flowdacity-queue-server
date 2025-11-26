@@ -1,28 +1,28 @@
 SHARQ Server
 ============
 
-SHARQ Server is an flexible, rate limited queuing system based on the [SHARQ Core library](https://github.com/plivo/sharq) and [Redis](https://redis.io).
+SHARQ Server is an flexible, rate limited queuing system based on the [SHARQ Core library](https://github.com/plivo/fq) and [Redis](https://redis.io).
 
 ## Overview
 
 SHARQ Server is a flexible, open source, rate limited queuing system. Based on the [Leaky Bucket Algorithm](http://en.wikipedia.org/wiki/Leaky_bucket#The_Leaky_Bucket_Algorithm_as_a_Queue), SHARQ lets you create queues dynamically and update their rate limits in real time.
 
-SHARQ consists of two components - the core component and the server component. The [SHARQ core](https://github.com/plivo/sharq) is built on [Redis](https://redis.io), using Python and Lua, and the SHARQ Server is built using [Flask](http://flask.pocoo.org/) and [Gevent](http://www.gevent.org/) and talks HTTP.
+SHARQ consists of two components - the core component and the server component. The [SHARQ core](https://github.com/plivo/fq) is built on [Redis](https://redis.io), using Python and Lua, and the SHARQ Server is built using [Flask](http://flask.pocoo.org/) and [Gevent](http://www.gevent.org/) and talks HTTP.
 
 ## Installation
 
 SHARQ Server can be installed using [pip](http://pip.readthedocs.org/en/latest/installing.html) as follows:
 
 ```
-pip install sharqserver
+pip install fqserver
 ```
 
 ## Running the server
 
-SHARQ server can be started with the following command. A simple SHARQ config file can be [found here](https://github.com/plivo/sharq-server/blob/master/sharq.conf).
+SHARQ server can be started with the following command. A simple SHARQ config file can be [found here](https://github.com/plivo/fq-server/blob/master/fq.conf).
 
 ```
-$sharq-server --config sharq.conf
+$fq-server --config fq.conf
 ```
 
 Ensure the SHARQ server is up by making a HTTP request.
@@ -30,13 +30,13 @@ Ensure the SHARQ server is up by making a HTTP request.
 ```
 $curl http://127.0.0.1:8080/
 {
-  "message": "Hello, SharQ!"
+  "message": "Hello, FQ!"
 }
 ```
 
 ## Documentation
 
-Check out [sharq.io](http://sharq.io) for documentation.
+Check out [fq.io](http://fq.io) for documentation.
 
 ## License
 

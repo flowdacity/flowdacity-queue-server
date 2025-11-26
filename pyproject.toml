@@ -1,0 +1,14 @@
+[project]
+name = "flowdacity-queue-server"
+version = "0.1.0"
+description = "An API queuing server based on the Flowdacity Queue (FQ) library."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flowdacity-queue>=0.1.0",
+    "msgpack>=1.1.2",
+    "redis[hiredis]>=7.1.0",
+    "starlette>=0.50.0",
+    "ujson>=5.11.0",
+    "uvicorn>=0.38.0",
+]

@@ -2,14 +2,14 @@
 # Copyright (c) 2014 Plivo Team. See LICENSE.txt for details.
 import unittest
 import ujson as json
-from sharq_server import setup_server
+from fq_server import setup_server
 
 
-class SharQServerTestCase(unittest.TestCase):
+class FQServerTestCase(unittest.TestCase):
 
     def setUp(self):
         # get test client & redis connection
-        server = setup_server('./sharq.conf')
+        server = setup_server('./fq.conf')
         self.app = server.app.test_client()
         self.r = server.sq._r
 
@@ -20,7 +20,7 @@ class SharQServerTestCase(unittest.TestCase):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            json.loads(response.data), {'message': 'Hello, SharQ!'})
+            json.loads(response.data), {'message': 'Hello, FQ!'})
 
     def test_enqueue(self):
         request_params = {
