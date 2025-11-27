@@ -1,65 +1,98 @@
-SHARQ Server
-============
+[![Run tests and upload coverage](https://github.com/flowdacity/flowdacity-queue-server/actions/workflows/test.yml/badge.svg)](https://github.com/flowdacity/flowdacity-queue-server/actions/workflows/test.yml)
 
-SHARQ Server is an flexible, rate limited queuing system based on the [SHARQ Core library](https://github.com/plivo/fq) and [Redis](https://redis.io).
+Flowdacity Queue Server
+=======================
 
-## Overview
+An async HTTP API for the [Flowdacity Queue (FQ)](https://github.com/plivo/fq) core, built with Starlette and Uvicorn. It keeps the original SHARQ behavior (leaky-bucket rate limiting and dynamic queues) while modernizing the stack.
 
-SHARQ Server is a flexible, open source, rate limited queuing system. Based on the [Leaky Bucket Algorithm](http://en.wikipedia.org/wiki/Leaky_bucket#The_Leaky_Bucket_Algorithm_as_a_Queue), SHARQ lets you create queues dynamically and update their rate limits in real time.
+## Prerequisites
 
-SHARQ consists of two components - the core component and the server component. The [SHARQ core](https://github.com/plivo/fq) is built on [Redis](https://redis.io), using Python and Lua, and the SHARQ Server is built using [Flask](http://flask.pocoo.org/) and [Gevent](http://www.gevent.org/) and talks HTTP.
+- Python 3.12+
+- Redis 7+ reachable from the server
+- A Flowdacity Queue config file (see `default.conf` for a starter)
 
 ## Installation
 
-SHARQ Server can be installed using [pip](http://pip.readthedocs.org/en/latest/installing.html) as follows:
+Clone the repo and install the package plus dev tools (uses [`uv`](https://github.com/astral-sh/uv) by default):
 
-```
-pip install fqserver
-```
-
-## Running the server
-
-SHARQ server can be started with the following command. A simple SHARQ config file can be [found here](https://github.com/plivo/fq-server/blob/master/fq.conf).
-
-```
-$fq-server --config fq.conf
+```bash
+uv sync --group dev
+# or: uv pip install --system .
 ```
 
-Ensure the SHARQ server is up by making a HTTP request.
+If you prefer pip/venv without `uv`:
 
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+pip install pytest pytest-cov
 ```
-$curl http://127.0.0.1:8080/
-{
-  "message": "Hello, FQ!"
-}
+
+## Configuration
+
+- Point the server at your FQ config via `FQ_CONFIG` (defaults to `./default.conf`).
+- `default.conf` defines three sections:
+  - `[fq]` queue behavior (intervals, requeue limits).
+  - `[fq-server]` host/port for the HTTP server (used by Docker/local defaults).
+  - `[redis]` connection details for your Redis instance.
+- Copy and tweak as needed:
+
+```bash
+cp default.conf local.conf
+# edit local.conf to match your Redis host/port/password
 ```
 
-## Documentation
+## Run the server locally
 
-Check out [fq.io](http://fq.io) for documentation.
+```bash
+# ensure Redis is running (make redis starts a container)
+make redis
+
+# start the ASGI server
+FQ_CONFIG=./local.conf uv run uvicorn asgi:app --host 0.0.0.0 --port 8080
+```
+
+Docker Compose is also available:
+
+```bash
+docker compose up --build
+```
+
+## API quick start
+
+```bash
+# health
+curl http://127.0.0.1:8080/
+
+# enqueue a job
+curl -X POST http://127.0.0.1:8080/enqueue/sms/user42/ \
+  -H "Content-Type: application/json" \
+  -d '{"job_id":"job-1","payload":{"message":"hi"},"interval":1000}'
+
+# dequeue
+curl http://127.0.0.1:8080/dequeue/sms/
+
+# mark finished
+curl -X POST http://127.0.0.1:8080/finish/sms/user42/job-1/
+
+# metrics
+curl http://127.0.0.1:8080/metrics/
+curl http://127.0.0.1:8080/metrics/sms/user42/
+```
+
+All endpoints return JSON; failures surface as HTTP 4xx/5xx with a `status` field in the body.
+
+## Testing
+
+Redis must be available. With dev deps installed:
+
+```bash
+uv run pytest
+# or
+make test
+```
 
 ## License
 
-```
-The MIT License (MIT)
-
-Copyright (c) 2014 Plivo Inc
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+MIT — see `LICENSE.txt`.
