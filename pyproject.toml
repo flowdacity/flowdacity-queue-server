@@ -19,3 +19,22 @@ dev = [
     "pytest>=9.0.1",
     "pytest-cov>=7.0.0",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+# package is directly in the project root
+packages = ["fq_server"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "fq_server",
+  "README.md",
+  "LICENSE.txt",
+  "default.conf",
+  "asgi.py",
+  "docs",
+  "Makefile",
+]
