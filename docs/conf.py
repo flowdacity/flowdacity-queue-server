@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# sharq server documentation build configuration file, created by
+# fq server documentation build configuration file, created by
 # sphinx-quickstart on Mon Sep 22 17:57:32 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -116,7 +116,7 @@ html_theme = 'alabaster'
 html_theme_options = {
     'logo': 'logo.png',
     'github_user': 'plivo',
-    'github_repo': 'sharq-server',
+    'github_repo': 'fq-server',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -197,7 +197,7 @@ html_sidebars = {
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'sharqserverdoc'
+htmlhelp_basename = 'fqserverdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -217,7 +217,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'sharqserver.tex', u'sharq server Documentation',
+  ('index', 'fqserver.tex', u'fq server Documentation',
    u'Plivo Team', 'manual'),
 ]
 
@@ -247,7 +247,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'sharqserver', u'sharq server Documentation',
+    ('index', 'fqserver', u'fq server Documentation',
      [u'Plivo Team'], 1)
 ]
 
@@ -261,8 +261,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'sharqserver', u'sharq server Documentation',
-   u'Plivo Team', 'sharqserver', 'One line description of project.',
+  ('index', 'fqserver', u'fq server Documentation',
+   u'Plivo Team', 'fqserver', 'One line description of project.',
    'Miscellaneous'),
 ]
 

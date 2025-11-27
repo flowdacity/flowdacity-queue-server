@@ -66,7 +66,7 @@ All expired jobs in the SHARQ Server will be re-queued back into their respectiv
 Is there a way to run the SHARQ Server using uWSGI?
 ===================================================
 
-Yes! By default the SHARQ Server uses `Gunicorn <http://gunicorn.org/>`_ internally. If you want to use `uWSGI <https://uwsgi-docs.readthedocs.org/en/latest/>`_ or any other server based on WSGI, you can do so by running ``wsgi.py`` provided in the source files `available on Github <https://github.com/plivo/sharq-server/blob/master/wsgi.py>`_. For optimal performance, it is recommended to use  uWSGI with `Nginx <http://nginx.org/>`_. More details can be found in the `uWSGI documentation <http://uwsgi-docs.readthedocs.org/en/latest/Nginx.html>`_.
+Yes! By default the SHARQ Server uses `Gunicorn <http://gunicorn.org/>`_ internally. If you want to use `uWSGI <https://uwsgi-docs.readthedocs.org/en/latest/>`_ or any other server based on WSGI, you can do so by running ``wsgi.py`` provided in the source files `available on Github <https://github.com/plivo/fq-server/blob/master/wsgi.py>`_. For optimal performance, it is recommended to use  uWSGI with `Nginx <http://nginx.org/>`_. More details can be found in the `uWSGI documentation <http://uwsgi-docs.readthedocs.org/en/latest/Nginx.html>`_.
 
 How do I know the number of jobs in any queue in real time?
 ===========================================================
@@ -90,8 +90,8 @@ The SHARQ code base is split into two components - the core component and the se
 
 **Github Repository Links:**
 
-* The SHARQ Core - https://github.com/plivo/sharq
-* The SHARQ Server - https://github.com/plivo/sharq-server
+* The SHARQ Core - https://github.com/plivo/fq
+* The SHARQ Server - https://github.com/plivo/fq-server
 
 Read the `Contributing <contributing.html>`_ section for more details.
 

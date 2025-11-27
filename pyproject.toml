@@ -1,0 +1,40 @@
+[project]
+name = "flowdacity-queue-server"
+version = "0.1.0"
+description = "An API queuing server based on the Flowdacity Queue (FQ) library."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flowdacity-queue>=0.1.0",
+    "httpx>=0.28.1",
+    "msgpack>=1.1.2",
+    "redis[hiredis]>=7.1.0",
+    "starlette>=0.50.0",
+    "ujson>=5.11.0",
+    "uvicorn>=0.38.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
+    "pytest-cov>=7.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+# package is directly in the project root
+packages = ["fq_server"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "fq_server",
+  "README.md",
+  "LICENSE.txt",
+  "default.conf",
+  "asgi.py",
+  "docs",
+  "Makefile",
+]

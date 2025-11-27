@@ -2,9 +2,9 @@
 Getting Started
 ===============
 
-Once the SHARQ Server is installed, it will expose a **sharq-server** command. If you have not yet installed the SHARQ Server, refer `here <installation.html>`_ for instructions.
+Once the SHARQ Server is installed, it will expose a **fq-server** command. If you have not yet installed the SHARQ Server, refer `here <installation.html>`_ for instructions.
 
-The **sharq-server** command is minimal and accepts a SHARQ configuration file. To get started quickly, fetch the `SHARQ sample configuration file <https://raw.githubusercontent.com/plivo/sharq-server/master/sharq.conf>`_. Refer to the `configuration section <configuration.html>`_ for more details.
+The **fq-server** command is minimal and accepts a SHARQ configuration file. To get started quickly, fetch the `SHARQ sample configuration file <https://raw.githubusercontent.com/plivo/fq-server/master/fq.conf>`_. Refer to the `configuration section <configuration.html>`_ for more details.
 
 Running the SHARQ Server
 ------------------------
@@ -13,7 +13,7 @@ The SHARQ Server can be started with the following command.
 
 ::
 
-    sharq-server --config sharq.conf
+    fq-server --config fq.conf
 
 
 This will run the SHARQ Server in the foreground with the following output.
@@ -37,7 +37,7 @@ Ensure the SHARQ Server has started up correctly by making an HTTP GET request t
 
     curl http://127.0.0.1:8080/
     {
-      "message": "Hello, SharQ!"
+      "message": "Hello, FQ!"
     }
 
 

@@ -9,7 +9,7 @@ The SHARQ configuration file is minimal and has three sections.
 * `Redis Section <#id3>`_
 
 
-sharq section
+fq section
 ~~~~~~~~~~~~~
 
 This section contains the configurations specific to the SHARQ core.
@@ -27,7 +27,7 @@ job\_requeue\_interval
 two clean up processes. A clean up re-queues all the expired jobs back into their
 respective queues.
 
-sharq-server section
+fq-server section
 ~~~~~~~~~~~~~~~~~~~~
 
 This section contains the configurations specific to the SHARQ Server.
@@ -96,23 +96,23 @@ IP address or FQDN of Redis.
 A Sample Configuration File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A sample configuration file looks like this. You can also get this configuration file from the `Github repository <https://raw.githubusercontent.com/plivo/sharq-server/master/sharq.conf>`_.
+A sample configuration file looks like this. You can also get this configuration file from the `Github repository <https://raw.githubusercontent.com/plivo/fq-server/master/fq.conf>`_.
 
 .. code-block:: ini
 
-    [sharq]
+    [fq]
     job_expire_interval  : 1000 ; in milliseconds
     job_requeue_interval : 1000 ; in milliseconds
 
-    [sharq-server]
+    [fq-server]
     host                 : 127.0.0.1
     port                 : 8080
     workers              : 1 ; optional
-    accesslog            : /tmp/sharq.log ; optional
+    accesslog            : /tmp/fq.log ; optional
 
     [redis]
     db                   : 0
-    key_prefix           : sharq_server
+    key_prefix           : fq_server
     conn_type            : tcp_sock ; or unix_sock
     ;; unix connection settings
     unix_socket_path     : /tmp/redis.sock
