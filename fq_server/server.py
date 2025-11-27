@@ -7,6 +7,7 @@ import configparser
 import traceback
 import ujson as json
 from redis.exceptions import LockError
+from contextlib import asynccontextmanager, suppress
 from fq import FQ
 
 from starlette.applications import Starlette
@@ -31,7 +32,7 @@ class FQServer(object):
         # Starlette app with routes and startup hook
         self.app = Starlette(
             routes=self._build_routes(),
-            on_startup=[self._on_startup],
+            lifespan=self._lifespan,
         )
 
     # ------------------------------------------------------------------
@@ -74,12 +75,24 @@ class FQServer(object):
             finally:
                 await asyncio.sleep(job_requeue_interval / 1000.0)
 
-    async def _on_startup(self):
-        """Configure background tasks on app startup."""
-        
+    # ------------------------------------------------------------------
+    # Lifespan handler
+    # ------------------------------------------------------------------
+    @asynccontextmanager
+    async def _lifespan(self, app: Starlette):
+        # --- startup ---
         await self.queue._initialize()
         # mimic original behavior: use requeue_with_lock loop
-        asyncio.create_task(self.requeue_with_lock())
+        self._requeue_task = asyncio.create_task(self.requeue_with_lock())
+
+        try:
+            yield
+        finally:
+            # --- shutdown ---
+            if self._requeue_task is not None:
+                self._requeue_task.cancel()
+                with suppress(asyncio.CancelledError):
+                    await self._requeue_task
 
     # ------------------------------------------------------------------
     # Routes definition
