@@ -586,7 +586,7 @@ class FQServerLifespanTestCase(unittest.IsolatedAsyncioTestCase):
         await asyncio.sleep(0.05)
         self.assertTrue(server._requeue_task.done() or server._requeue_task.cancelled())
 
-    async def test_lifespaninitializes_queue(self):
+    async def test_lifespan_initializes_queue(self):
         """Test that lifespan calls queue.initialize()."""
         config_path = os.path.join(os.path.dirname(__file__), "test.conf")
         server = setup_server(config_path)
