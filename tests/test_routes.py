@@ -42,7 +42,8 @@ class FQConfigTestCase(unittest.TestCase):
 class FQServerTestCase(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         # build server and Starlette app
-        server = setup_server("./default.conf")
+        config_path = os.path.join(os.path.dirname(__file__), "test.conf")
+        server = setup_server(config_path)
         self.server = server
         self.app: ASGIApp = server.app
 
