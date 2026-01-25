@@ -1,4 +1,4 @@
-.PHONY: all clean test
+.PHONY: all clean test redis-up redis-down
 
 # Default target
 all: clean test
@@ -12,10 +12,16 @@ clean:
 	rm -rf dist build *.egg-info
 
 # Run tests — prefers pytest, falls back to python modules
-test:
-	@if python -c "import pytest" 2>/dev/null; then \
-		python -m pytest -q; \
-	else \
-		echo 'pytest not installed — running direct test modules'; \
-		python -m tests.test_routes; \
-	fi
+test: redis-up
+	@status=0; \
+	uv run pytest tests || uv run python -m unittest discover -s tests || status=$$?; \
+	$(MAKE) redis-down; \
+	exit $$status
+
+# Start Redis container
+redis-up:
+	docker compose up -d redis
+
+# Stop Redis container
+redis-down:
+	docker compose down
