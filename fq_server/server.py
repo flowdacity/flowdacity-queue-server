@@ -83,7 +83,7 @@ class FQServer(object):
     @asynccontextmanager
     async def _lifespan(self, app: Starlette):
         # --- startup ---
-        await self.queue._initialize()
+        await self.queue.initialize()
         # mimic original behavior: use requeue_with_lock loop
         self._requeue_task = asyncio.create_task(self.requeue_with_lock())
 
