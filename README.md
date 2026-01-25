@@ -1,4 +1,5 @@
 [![Run tests and upload coverage](https://github.com/flowdacity/flowdacity-queue-server/actions/workflows/test.yml/badge.svg)](https://github.com/flowdacity/flowdacity-queue-server/actions/workflows/test.yml)
+[![codecov](https://codecov.io/github/flowdacity/flowdacity-queue-server/graph/badge.svg?token=9AK3GR856C)](https://codecov.io/github/flowdacity/flowdacity-queue-server)
 
 Flowdacity Queue Server
 =======================
