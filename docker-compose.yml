@@ -2,10 +2,12 @@ services:
   app:
     build: .
     environment:
-      - FQ_CONFIG=/app/docker.conf
+      - FQ_CONFIG=/app/default.conf
       - PORT=8080
     ports:
       - "8080:8080"
+    volumes:
+      - ./default.conf:/app/default.conf:ro
     depends_on:
       redis:
         condition: service_healthy

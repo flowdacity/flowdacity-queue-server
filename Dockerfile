@@ -9,7 +9,6 @@ FROM python:${PYTHON_VERSION}-slim
 ARG PORT
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    FQ_CONFIG=/app/docker.conf \
     UV_LINK_MODE=copy \
     PORT=${PORT}
 
