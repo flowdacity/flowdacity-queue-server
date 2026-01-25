@@ -4,7 +4,7 @@
 Flowdacity Queue Server
 =======================
 
-An async HTTP API for the [Flowdacity Queue (FQ)](https://github.com/flowdacity/flowdacity-queue-server) core, built with Starlette and Uvicorn. It keeps the original SHARQ behavior (leaky-bucket rate limiting and dynamic queues) while modernizing the stack.
+An async HTTP API for the [Flowdacity Queue (FQ)](https://github.com/flowdacity/flowdacity-queue) core, built with Starlette and Uvicorn. It keeps the original SHARQ behavior (leaky-bucket rate limiting and dynamic queues) while modernizing the stack.
 
 ## Prerequisites
 
