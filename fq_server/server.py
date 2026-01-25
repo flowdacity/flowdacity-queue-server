@@ -25,7 +25,9 @@ class FQServer(object):
         """Load the FQ config and define the routes."""
         # read the configs required by fq-server.
         self.config = configparser.ConfigParser()
-        self.config.read(config_path)
+        files_read = self.config.read(config_path)
+        if not files_read:
+            raise FileNotFoundError(f"Config file not found: {config_path}")
         # pass the config file to configure the FQ core.
         self.queue = FQ(config_path)
 

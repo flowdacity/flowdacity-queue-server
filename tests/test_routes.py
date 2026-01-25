@@ -3,11 +3,40 @@
 # -*- coding: utf-8 -*-
 # Copyright ...
 
+import os
 import unittest
 import ujson as json
 from httpx import AsyncClient, ASGITransport
 from starlette.types import ASGIApp
 from fq_server import setup_server
+from fq_server.server import FQServer
+
+
+class FQConfigTestCase(unittest.TestCase):
+    """Tests for configuration validation."""
+
+    def test_missing_fq_config_env_var(self):
+        """Test that missing FQ_CONFIG environment variable raises an error."""
+        # Ensure FQ_CONFIG is not set
+        env_backup = os.environ.pop("FQ_CONFIG", None)
+        try:
+            with self.assertRaises(EnvironmentError) as context:
+                # Re-import asgi module to trigger the check
+                import importlib
+                import asgi
+
+                importlib.reload(asgi)
+            self.assertIn("FQ_CONFIG", str(context.exception))
+        finally:
+            # Restore the environment variable if it was set
+            if env_backup is not None:
+                os.environ["FQ_CONFIG"] = env_backup
+
+    def test_config_file_not_found(self):
+        """Test that non-existent config file raises FileNotFoundError."""
+        with self.assertRaises(FileNotFoundError) as context:
+            FQServer("/nonexistent/path/to/config.conf")
+        self.assertIn("Config file not found", str(context.exception))
 
 
 class FQServerTestCase(unittest.IsolatedAsyncioTestCase):
