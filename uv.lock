@@ -121,15 +121,15 @@ wheels = [
 
 [[package]]
 name = "flowdacity-queue"
-version = "0.1.1"
+version = "0.1.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "msgpack" },
     { name = "redis", extra = ["hiredis"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9e/ea/213fe6d955638bce6a584b971b02a2ad8fa8d5257244709adcf3b5a22644/flowdacity_queue-0.1.1.tar.gz", hash = "sha256:8daea171a9f5c81db5758a04429679bf17ccd6fe441f2b1dd128a5a8843ad7b5", size = 11190, upload-time = "2026-01-25T19:57:08.209Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/14/15/e9c00312dbb237f4508a94a1b3fd46459ffda3065c2d92276f1d788f494e/flowdacity_queue-0.1.2.tar.gz", hash = "sha256:4b872ca778a796c6db12652cf771342433dfd4dee846dc79a781c2bd18565ab1", size = 11487, upload-time = "2026-01-26T11:20:43.124Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/03/08/cb0c0ea473672d27400c77e315a772440e394bf05acac8957c09b4088490/flowdacity_queue-0.1.1-py3-none-any.whl", hash = "sha256:7580b635e4f4f9d5b18038a7caab2bebf2e65462faf02dcd98de4c0a28418312", size = 15042, upload-time = "2026-01-25T19:57:06.769Z" },
+    { url = "https://files.pythonhosted.org/packages/2c/a0/89d6be8592a750e370fbf25c0b9f3c8b8cfb0de7d0ae32b325db11047f6c/flowdacity_queue-0.1.2-py3-none-any.whl", hash = "sha256:da75e9707eb660b98b5a5ed522899da1496b6c8feb2e2fb3cf7f557c6da1c79d", size = 15347, upload-time = "2026-01-26T11:20:41.653Z" },
 ]
 
 [[package]]
