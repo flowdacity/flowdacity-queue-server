@@ -4,10 +4,13 @@
 import os
 from fq_server import setup_server
 
-# read config path from env variable, fail if not defined
+# read config path from env variable, use default if not set
 fq_config_path = os.environ.get("FQ_CONFIG")
 if fq_config_path is None:
-    raise EnvironmentError("FQ_CONFIG environment variable must be defined")
+    print(
+        "Warning: FQ_CONFIG environment variable not set. Using default config path './default.conf'."
+    )
+    fq_config_path = "./default.conf"
 fq_config_path = os.path.abspath(fq_config_path)
 
 server = setup_server(fq_config_path)
